@@ -1,0 +1,25 @@
+---
+
+- name: Install MySQL server
+  ansible.builtin.dnf:
+    name: mysql-server
+    state: latest
+
+- name: Remove contents of /var/lib/mysql/ directory
+  ansible.builtin.file:
+    path: /var/lib/mysql/*
+    state: absent
+
+- name: Enable MySQL service
+  ansible.builtin.service:
+    name: mysqld
+    enabled: true
+
+- name: Update server 
+  ansible.builtin.dnf:
+    name: "*"
+    state: latest
+
+- name: Reboot server
+  ansible.builtin.reboot:
+  
