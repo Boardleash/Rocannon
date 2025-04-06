@@ -1,0 +1,11 @@
+debian:
+  hosts:
+    jellyfish:
+    pelagia:
+    sandbar:
+rhel:
+  hosts:
+    avalanche:
+    freighter:
+    stingray:
+    summit:
