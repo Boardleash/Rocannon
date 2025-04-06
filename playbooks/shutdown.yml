@@ -1,0 +1,9 @@
+---
+
+- name: Shutdown all virtual servers
+  hosts: all
+  gather_facts: false
+  become: true
+  tasks:
+  - name: Unconditionally shutdown all hosts
+    command: shutdown -h now

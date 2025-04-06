@@ -1,0 +1,33 @@
+---
+
+- name: Create "scripters" group, sync local scripts and change/verify ownership of script directory
+  hosts: all
+  become: false
+  gather_facts: false
+  tasks:
+    - name: Create "scripters" group if it does NOT exist
+      group:
+        name: scripters
+        state: present
+
+    - name: Add "ansi" user to the "scripters" group
+      user:
+        name: "ansi"
+        append: true
+        groups: "scripters"
+
+    - name: Change ownership of /usr/local/bin/ recursively
+      ansible.builtin.file:
+        path: /usr/local/bin/
+        owner: root
+        group: scripters
+        recurse: true
+
+    - name: Sync scripts to virtual servers
+      ansible.posix.synchronize:
+        archive: true
+        delete: true
+        rsync_opts:
+        private_key: /home/ansi/.ssh/ansible
+        src: /home/ansi/synced_scripts
+        dest: /home/ansi/synced_scripts

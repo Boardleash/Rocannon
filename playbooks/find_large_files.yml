@@ -1,0 +1,26 @@
+---
+
+- name: Find Large Files
+  hosts: all
+  gather_facts: false
+  become: true
+  tasks:
+    - name: Find files larger than 1GB within the home directory
+      ansible.builtin.find:
+        paths: /home/
+        size: 1g
+        file_type: file
+        hidden: true
+        recurse: true
+      register: results
+
+    - name: Write the results of find to a file
+      ansible.builtin.copy:
+        content: "{{results.files}}"
+        dest: "/tmp/large_files.txt"
+
+    - name: Fetch the results file
+      fetch:
+        src: "/tmp/large_files.txt"
+        dest: "/tmp/large_files.txt"
+        flat: yes

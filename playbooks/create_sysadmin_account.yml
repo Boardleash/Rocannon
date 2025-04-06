@@ -1,0 +1,18 @@
+---
+
+- name: Create Sysadmin Account
+  hosts: all
+  gather_facts: false
+  become: true
+  tasks:
+    - name: Create user "sysadmin" with a home, specific shell, comment and ssh key
+      when: user_result == 0
+      user:
+        name: sysadmin 
+        comment: "System Administrator"
+        create_home: yes
+        shell: /bin/bash
+        generate_ssh_key: true
+        ssh_key_type: "ed25519"
+        ssh_key_file: .ssh/sysadmin
+        ssh_key_comment: "sysadmin-default-key"

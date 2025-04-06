@@ -1,0 +1,20 @@
+---
+
+- name: Check if CentOS/Rocky servers are online
+  hosts: rhel
+  #hosts: rocky,cent
+  become: false
+  gather_facts: false
+  ignore_errors: false
+  tasks:
+    - name: Ping CentOS/Rocky servers
+      ansible.builtin.ping:
+- name: Check if Debian based servers are online
+  hosts: debian
+  #hosts: ubuntu,lubuntu
+  become: false
+  gather_facts: false
+  ignore_errors: false
+  tasks:
+    - name: Ping Debian servers
+      ansible.builtin.ping:
