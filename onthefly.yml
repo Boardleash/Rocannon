@@ -1,0 +1,6 @@
+---
+
+- hosts: '{{ target }}'
+  gather_facts: true
+  roles:
+    - freeipa_client_install

@@ -1,0 +1,34 @@
+---
+# Items in "<>" should be changed
+- name: Create "<group>" group if it does NOT exist
+  group:
+    name: <group>
+    state: present
+
+- name: Add "<ansible user>" user to the "<group>" group
+  user:
+    name: "<ansible user>"
+    append: true
+    groups: "<group>"
+
+- name: Create /usr/local/bin/ directory if it doesn't exist
+  file:
+    state: directory
+    path: /usr/local/bin/
+    owner: <owner>
+    group: <group>
+
+- name: Change /usr/local/bin/ directory ownership recursively
+  ansible.builtin.file:
+    path: /usr/local/bin/
+    owner: <owner>
+    group: <group>
+    recurse: true
+
+- name: Sync homebrew scripts to virtual servers
+  ansible.posix.synchronize:
+    archive: true
+    delete: true
+    private_key: /home/<ansible user key>/.ssh/<key name>
+    src: /usr/local/bin
+    dest: /usr/local/bin

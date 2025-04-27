@@ -1,0 +1,65 @@
+---
+
+- name: Install FreeIPA Client
+  ansible.builtin.dnf:
+    name: freeipa-client
+    state: latest
+
+- name: Permanently Add Port 389/tcp to Firewalld
+  ansible.posix.firewalld:
+    port: 389/tcp
+    permanent: true
+    state: enabled
+
+- name: Permanently Add Port 636/tcp to Firewalld
+  ansible.posix.firewalld:
+    port: 636/tcp
+    permanent: true
+    state: enabled
+
+- name: Permanently Add Port 88/tcp to Firewalld
+  ansible.posix.firewalld:
+    port: 88/tcp
+    permanent: true
+    state: enabled
+
+- name: Permanently Add Port 464/tcp to Firewalld
+  ansible.posix.firewalld:
+    port: 464/tcp
+    permanent: true
+    state: enabled
+
+- name: Permanently Add Port 53/tcp to Firewalld
+  ansible.posix.firewalld:
+    port: 53/tcp
+    permanent: true
+    state: enabled
+
+- name: Permanently Add Port 53/udp to Firewalld
+  ansible.posix.firewalld:
+    port: 53/udp
+    permanent: true
+    state: enabled
+
+- name: Permanently Add Port 88/udp to Firewalld
+  ansible.posix.firewalld:
+    port: 88/udp
+    permanent: true
+    state: enabled
+
+- name: Permanently Add Port 464/udp to Firewalld
+  ansible.posix.firewalld:
+    port: 464/udp
+    permanent: true
+    state: enabled
+
+- name: Permanently Add Port 123/udp to Firewalld
+  ansible.posix.firewalld:
+    port: 123/udp
+    permanent: true
+    state: enabled
+
+- name: Reload Firewalld
+  ansible.builtin.service:
+    name: firewalld
+    state: reloaded
