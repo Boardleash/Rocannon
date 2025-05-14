@@ -3,4 +3,8 @@
 - hosts: '{{ target }}'
   gather_facts: true
   roles:
-    - freeipa_client_install
+    #- freeipa_client_install
+    #- local_script_sync
+    #- mariadb_setup
+    #- postgres_setup
+    #- update_time
